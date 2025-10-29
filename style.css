@@ -1,0 +1,235 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #4B0082;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+.balloons-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+}
+
+.balloon {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: float 15s infinite;
+}
+
+.balloon::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.7);
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0);
+    }
+    100% {
+        transform: translateY(-100vh) translateX(var(--move-x));
+    }
+}
+
+.scroll-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.scroll-text.show {
+    opacity: 1;
+}
+
+.button-container {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.message-button {
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.message-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.message-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 80%;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #333;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.message-content {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.message-content h1 {
+    color: #4B0082;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.message-content p {
+    margin-bottom: 15px;
+}
+
+.scroll-instruction {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    margin: 20px 0;
+    animation: pulse 2s infinite;
+    font-family: 'Montserrat', sans-serif;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.photo-button {
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #333;
+    color: #000;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.photo-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.photo-gallery {
+    display: none;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.photo-item {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .message-popup {
+        padding: 15px;
+        width: 90%;
+        max-height: 85vh;
+        margin: 10px auto;
+        overflow-y: auto;
+    }
+
+    .message-content h1 {
+        font-size: 20px;
+    }
+
+    .message-content p {
+        font-size: 14px;
+    }
+
+    .message-button,
+    .photo-button {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+
+    .scroll-text {
+        font-size: 18px;
+    }
+
+    .balloon {
+        width: 20px;
+        height: 30px;
+    }
+
+    .photo-gallery {
+        padding: 10px;
+        width: 95%;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 5px;
+    }
+
+    .photo-item {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 8px;
+    }
+}
